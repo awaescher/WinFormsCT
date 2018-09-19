@@ -13,11 +13,13 @@ namespace TestApp
 
 		private void biCT_Click(object sender, EventArgs e)
 		{
-			var tomograph = new Tomograph();
-			var visualizer = new SlicesVisualizerForm();
+			this.ScanAndAnalyze();
+		}
 
-			var slices = tomograph.Scan(this);
-			visualizer.Show(slices);
+		private void biDialog_Click(object sender, EventArgs e)
+		{
+			using (var dialog = new TestDialog())
+				dialog.ShowDialog();
 		}
 	}
 }

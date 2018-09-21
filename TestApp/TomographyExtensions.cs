@@ -11,6 +11,14 @@ namespace TestApp
 			var visualizer = new SlicesVisualizerForm();
 
 			var slices = tomograph.Scan(form);
+			var layers = tomograph.RenderLayers(slices);
+
+			for (int i = 0; i < slices.Count; i++)
+				slices[i].Image.Save($@"C:\Temp\WinFormsCT\Slice{i}.png");
+
+			for (int i = 0; i < layers.Count; i++)
+				layers[i].Save($@"C:\Temp\WinFormsCT\Layer{i}.png");
+
 			visualizer.Show(slices);
 		}
 	}

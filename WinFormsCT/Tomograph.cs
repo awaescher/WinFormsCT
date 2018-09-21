@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 using WinFormsCT.Model;
 
@@ -13,6 +15,36 @@ namespace WinFormsCT
 			Develop(slices);
 
 			return slices;
+		}
+
+		public List<Image> RenderLayers(IEnumerable<Slice> slices)
+		{
+			var slicedForm = slices.FirstOrDefault()?.Control as Form;
+			if (slicedForm == null)
+				throw new ArgumentNullException("First slice has to be a System.Windows.Form!");
+
+			var layers = new List<Image>();
+			var layerSize = slicedForm.Size;
+
+			var slicesInLayers = slices
+				.OrderBy(s => s.Layer)
+				.GroupBy(s => s.Layer);
+
+			foreach (var slicesInLayer in slicesInLayers)
+			{
+				var bmp = new Bitmap(layerSize.Width, layerSize.Height);
+				using (var gfx = Graphics.FromImage(bmp))
+				{
+					var orderedSlices = slicesInLayer.OrderBy(s => s.Stamp);
+					foreach (var slice in orderedSlices)
+						gfx.DrawImage(slice.Image, slice.Location);
+				}
+
+				layers.Add(bmp);
+			}
+
+			return layers;
+
 		}
 
 		private List<Slice> CaptureSlices(Form form)
@@ -42,7 +74,8 @@ namespace WinFormsCT
 				Control = control,
 				OriginallyVisible = control.Visible,
 				Location = location,
-				Layer = layer
+				Layer = layer,
+				Stamp = DateTime.UtcNow.Ticks
 			};
 		}
 

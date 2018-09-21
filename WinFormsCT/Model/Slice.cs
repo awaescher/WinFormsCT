@@ -11,6 +11,8 @@ namespace WinFormsCT.Model
 
 		public int Layer { get; internal set; }
 
+		public long Stamp { get; internal set; }
+
 		public bool OriginallyVisible { get; internal set; }
 
 		public Image Image { get; internal set; }

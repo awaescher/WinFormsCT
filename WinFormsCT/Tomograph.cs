@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 using WinFormsCT.Model;
@@ -103,30 +104,42 @@ namespace WinFormsCT
 
 		private void Develop(Slice slice)
 		{
-			try
+			var invisibleControlColor = Color.FromArgb(125, Color.Red);
+
+			using (var invisibleControlBrush = new HatchBrush(HatchStyle.Percent20, invisibleControlColor, Color.Transparent))
+			using (var invisibleControlPen = new Pen(invisibleControlColor, 1))
 			{
-				slice.Control.Visible = true;
-
-				foreach (Control child in slice.Control.Controls)
-					child.Visible = false;
-
-				var bmp = new Bitmap(slice.Control.Width, slice.Control.Height);
-
-				slice.Control.DrawToBitmap(bmp, new Rectangle(Point.Empty, slice.Control.Size));
-
-				if (!slice.OriginallyVisible)
+				try
 				{
-					using (var gfx = Graphics.FromImage(bmp))
-					{
-						gfx.DrawRectangle(Pens.Red, new Rectangle(0, 0, bmp.Width - 1, bmp.Height - 1));
-					}
-				}
+					slice.Control.Visible = true;
 
-				slice.Image = bmp;
-			}
-			finally
-			{
-				slice.Control.Visible = slice.OriginallyVisible;
+					foreach (Control child in slice.Control.Controls)
+						child.Visible = false;
+
+					var bmp = new Bitmap(slice.Control.Width, slice.Control.Height);
+
+					slice.Control.DrawToBitmap(bmp, new Rectangle(Point.Empty, slice.Control.Size));
+
+					if (!slice.OriginallyVisible)
+					{
+						using (var gfx = Graphics.FromImage(bmp))
+						{
+							gfx.FillRectangle(invisibleControlBrush, new Rectangle(Point.Empty, bmp.Size));
+							gfx.DrawRectangle(invisibleControlPen, new Rectangle(
+								(int)(invisibleControlPen.Width / 2),
+								(int)(invisibleControlPen.Width / 2),
+								(int)(bmp.Width - invisibleControlPen.Width),
+								(int)(bmp.Height - invisibleControlPen.Width)));
+							
+						}
+					}
+
+					slice.Image = bmp;
+				}
+				finally
+				{
+					slice.Control.Visible = slice.OriginallyVisible;
+				}
 			}
 		}
 

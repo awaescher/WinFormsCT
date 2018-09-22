@@ -37,6 +37,7 @@
 			this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+			this.label5 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.listBox1 = new System.Windows.Forms.ListBox();
@@ -64,7 +65,7 @@
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.fIleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.label5 = new System.Windows.Forms.Label();
+			this.listBox2 = new System.Windows.Forms.ListBox();
 			this.groupBox1.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
@@ -169,6 +170,16 @@
 			this.linkLabel1.TabStop = true;
 			this.linkLabel1.Text = "linkLabel1";
 			// 
+			// label5
+			// 
+			this.label5.AutoSize = true;
+			this.label5.Location = new System.Drawing.Point(17, 131);
+			this.label5.Name = "label5";
+			this.label5.Size = new System.Drawing.Size(58, 17);
+			this.label5.TabIndex = 0;
+			this.label5.Text = "invisible";
+			this.label5.Visible = false;
+			// 
 			// label2
 			// 
 			this.label2.AutoSize = true;
@@ -191,10 +202,19 @@
 			// 
 			this.listBox1.FormattingEnabled = true;
 			this.listBox1.ItemHeight = 16;
-			this.listBox1.Location = new System.Drawing.Point(61, 295);
+			this.listBox1.Items.AddRange(new object[] {
+            "I\'ve",
+            "got",
+            "two",
+            "tickets",
+            "to",
+            "iron",
+            "maiden",
+            "baby"});
+			this.listBox1.Location = new System.Drawing.Point(9, 285);
 			this.listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(120, 84);
+			this.listBox1.Size = new System.Drawing.Size(98, 84);
 			this.listBox1.TabIndex = 7;
 			// 
 			// monthCalendar1
@@ -367,7 +387,7 @@
 			this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.tabPage2.Name = "tabPage2";
 			this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-			this.tabPage2.Size = new System.Drawing.Size(888, 617);
+			this.tabPage2.Size = new System.Drawing.Size(962, 663);
 			this.tabPage2.TabIndex = 1;
 			this.tabPage2.Text = "tabPage2";
 			this.tabPage2.UseVisualStyleBackColor = true;
@@ -377,6 +397,7 @@
 			this.panel1.Controls.Add(this.monthCalendar1);
 			this.panel1.Controls.Add(this.checkBox1);
 			this.panel1.Controls.Add(this.trackBar1);
+			this.panel1.Controls.Add(this.listBox2);
 			this.panel1.Controls.Add(this.listBox1);
 			this.panel1.Controls.Add(this.groupBox1);
 			this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -468,15 +489,24 @@
 			this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 26);
 			this.exitToolStripMenuItem.Text = "&Exit";
 			// 
-			// label5
+			// listBox2
 			// 
-			this.label5.AutoSize = true;
-			this.label5.Location = new System.Drawing.Point(17, 131);
-			this.label5.Name = "label5";
-			this.label5.Size = new System.Drawing.Size(58, 17);
-			this.label5.TabIndex = 0;
-			this.label5.Text = "invisible";
-			this.label5.Visible = false;
+			this.listBox2.FormattingEnabled = true;
+			this.listBox2.ItemHeight = 16;
+			this.listBox2.Items.AddRange(new object[] {
+            "Come",
+            "with",
+            "me",
+            "friday",
+            "don\'t",
+            "say",
+            "maybe"});
+			this.listBox2.Location = new System.Drawing.Point(112, 285);
+			this.listBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+			this.listBox2.Name = "listBox2";
+			this.listBox2.Size = new System.Drawing.Size(102, 84);
+			this.listBox2.TabIndex = 7;
+			this.listBox2.Visible = false;
 			// 
 			// TestForm
 			// 
@@ -557,6 +587,7 @@
 		private System.Windows.Forms.Label label3;
 		private System.Windows.Forms.TabPage tabPage2;
 		private System.Windows.Forms.Label label5;
+		private System.Windows.Forms.ListBox listBox2;
 	}
 }
 

@@ -47,6 +47,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DotNetControlsSliceSelector.cs" />
+    <Compile Include="IControlDecider.cs" />
     <Compile Include="SlicesVisualizerForm.cs" />
     <Compile Include="Model\CapturingContext.cs" />
     <Compile Include="Model\Slice.cs" />

@@ -9,9 +9,20 @@ namespace WinFormsCT
 {
 	public class Tomograph
 	{
+		public Tomograph()
+			: this(new DotNetControlsSliceSelector())
+		{
+		}
+
+		public Tomograph(ISliceSelector sliceSelector)
+		{
+			SliceSelector = sliceSelector ?? throw new ArgumentNullException(nameof(sliceSelector));
+		}
+
 		public List<Slice> Scan(Form target)
 		{
 			var slices = CaptureSlices(target);
+
 			Develop(slices);
 
 			return slices;
@@ -59,7 +70,13 @@ namespace WinFormsCT
 
 		private void CaptureSlices(CapturingContext context, Control current, List<Slice> slices, int layer)
 		{
-			slices.Add(CaptureSlice(context, current, layer));
+			var slice = CaptureSlice(context, current, layer);
+
+			// slice should not be shown (could be a hidden tabpage) -> skip it with all of its children
+			if (slice == null)
+				return;
+
+			slices.Add(slice);
 
 			foreach (Control control in current.Controls)
 				CaptureSlices(context, control, slices, layer + 1);
@@ -67,6 +84,9 @@ namespace WinFormsCT
 
 		private Slice CaptureSlice(CapturingContext context, Control control, int layer)
 		{
+			if (!SliceSelector.ShouldShowSlice(control))
+				return null;
+
 			var location = control is Form ? Point.Empty : GetRelativeLocation(context, control);
 
 			return new Slice()
@@ -91,7 +111,17 @@ namespace WinFormsCT
 					child.Visible = false;
 
 				var bmp = new Bitmap(slice.Control.Width, slice.Control.Height);
+
 				slice.Control.DrawToBitmap(bmp, new Rectangle(Point.Empty, slice.Control.Size));
+
+				if (!slice.OriginallyVisible)
+				{
+					using (var gfx = Graphics.FromImage(bmp))
+					{
+						gfx.DrawRectangle(Pens.Red, new Rectangle(0, 0, bmp.Width - 1, bmp.Height - 1));
+					}
+				}
+
 				slice.Image = bmp;
 			}
 			finally
@@ -112,5 +142,7 @@ namespace WinFormsCT
 
 			return result;
 		}
+
+		public ISliceSelector SliceSelector { get; }
 	}
 }

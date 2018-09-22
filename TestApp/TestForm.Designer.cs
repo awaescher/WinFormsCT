@@ -129,7 +129,7 @@
 			// checkBox1
 			// 
 			this.checkBox1.AutoSize = true;
-			this.checkBox1.Location = new System.Drawing.Point(96, 423);
+			this.checkBox1.Location = new System.Drawing.Point(9, 421);
 			this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.checkBox1.Name = "checkBox1";
 			this.checkBox1.Size = new System.Drawing.Size(98, 21);
@@ -214,7 +214,7 @@
 			this.listBox1.Location = new System.Drawing.Point(9, 285);
 			this.listBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.listBox1.Name = "listBox1";
-			this.listBox1.Size = new System.Drawing.Size(98, 84);
+			this.listBox1.Size = new System.Drawing.Size(98, 132);
 			this.listBox1.TabIndex = 7;
 			// 
 			// monthCalendar1
@@ -504,7 +504,7 @@
 			this.listBox2.Location = new System.Drawing.Point(112, 285);
 			this.listBox2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
 			this.listBox2.Name = "listBox2";
-			this.listBox2.Size = new System.Drawing.Size(102, 84);
+			this.listBox2.Size = new System.Drawing.Size(102, 132);
 			this.listBox2.TabIndex = 7;
 			this.listBox2.Visible = false;
 			// 

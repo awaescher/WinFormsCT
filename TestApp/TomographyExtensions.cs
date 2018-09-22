@@ -20,6 +20,9 @@ namespace TestApp
 				layers[i].Save($@"C:\Temp\WinFormsCT\Layer{i}.png");
 
 			visualizer.Show(slices);
+
+			var f = new VisualizerForm();
+			f.Show(layers);
 		}
 	}
 }

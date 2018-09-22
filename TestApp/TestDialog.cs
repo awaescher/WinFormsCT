@@ -18,6 +18,16 @@ namespace TestApp
 
 		private void button1_Click(object sender, EventArgs e)
 		{
+			Close();
+		}
+
+		private void button2_Click(object sender, EventArgs e)
+		{
+			Close();
+		}
+
+		private void picSlice_Click(object sender, EventArgs e)
+		{
 			this.ScanAndAnalyze();
 		}
 	}

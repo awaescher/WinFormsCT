@@ -30,30 +30,32 @@
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(TestDialog));
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
+			this.panel3 = new System.Windows.Forms.Panel();
+			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+			this.pictureBox2 = new System.Windows.Forms.PictureBox();
+			this.label6 = new System.Windows.Forms.Label();
+			this.textBox2 = new System.Windows.Forms.TextBox();
+			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.linkLabel1 = new System.Windows.Forms.LinkLabel();
 			this.label2 = new System.Windows.Forms.Label();
 			this.label1 = new System.Windows.Forms.Label();
 			this.button2 = new System.Windows.Forms.Button();
 			this.button1 = new System.Windows.Forms.Button();
 			this.panel1 = new System.Windows.Forms.Panel();
-			this.panel2 = new System.Windows.Forms.Panel();
-			this.pictureBox1 = new System.Windows.Forms.PictureBox();
-			this.label3 = new System.Windows.Forms.Label();
-			this.label4 = new System.Windows.Forms.Label();
-			this.textBox1 = new System.Windows.Forms.TextBox();
-			this.panel3 = new System.Windows.Forms.Panel();
-			this.label6 = new System.Windows.Forms.Label();
-			this.textBox2 = new System.Windows.Forms.TextBox();
-			this.pictureBox2 = new System.Windows.Forms.PictureBox();
-			this.linkLabel2 = new System.Windows.Forms.LinkLabel();
 			this.panel4 = new System.Windows.Forms.Panel();
+			this.pictureBox1 = new System.Windows.Forms.PictureBox();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.label4 = new System.Windows.Forms.Label();
+			this.label3 = new System.Windows.Forms.Label();
+			this.picSlice = new System.Windows.Forms.PictureBox();
 			this.groupBox1.SuspendLayout();
-			this.panel1.SuspendLayout();
-			this.panel2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
 			this.panel3.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
+			this.panel1.SuspendLayout();
 			this.panel4.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+			this.panel2.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.picSlice)).BeginInit();
 			this.SuspendLayout();
 			// 
 			// groupBox1
@@ -73,6 +75,73 @@
 			this.groupBox1.TabIndex = 9;
 			this.groupBox1.TabStop = false;
 			this.groupBox1.Text = "Credentials";
+			// 
+			// panel3
+			// 
+			this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
+			this.panel3.Controls.Add(this.linkLabel2);
+			this.panel3.Controls.Add(this.pictureBox2);
+			this.panel3.Controls.Add(this.label6);
+			this.panel3.Location = new System.Drawing.Point(20, 135);
+			this.panel3.Name = "panel3";
+			this.panel3.Size = new System.Drawing.Size(375, 56);
+			this.panel3.TabIndex = 11;
+			// 
+			// linkLabel2
+			// 
+			this.linkLabel2.AutoSize = true;
+			this.linkLabel2.Location = new System.Drawing.Point(64, 30);
+			this.linkLabel2.Name = "linkLabel2";
+			this.linkLabel2.Size = new System.Drawing.Size(44, 17);
+			this.linkLabel2.TabIndex = 12;
+			this.linkLabel2.TabStop = true;
+			this.linkLabel2.Text = "Why?";
+			// 
+			// pictureBox2
+			// 
+			this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left)));
+			this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
+			this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+			this.pictureBox2.Location = new System.Drawing.Point(11, 7);
+			this.pictureBox2.Name = "pictureBox2";
+			this.pictureBox2.Size = new System.Drawing.Size(45, 44);
+			this.pictureBox2.TabIndex = 12;
+			this.pictureBox2.TabStop = false;
+			// 
+			// label6
+			// 
+			this.label6.AutoSize = true;
+			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label6.Location = new System.Drawing.Point(64, 10);
+			this.label6.Name = "label6";
+			this.label6.Size = new System.Drawing.Size(212, 17);
+			this.label6.TabIndex = 0;
+			this.label6.Text = "Changes cannot be undone.";
+			// 
+			// textBox2
+			// 
+			this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox2.Location = new System.Drawing.Point(135, 64);
+			this.textBox2.Name = "textBox2";
+			this.textBox2.PasswordChar = '*';
+			this.textBox2.Size = new System.Drawing.Size(260, 22);
+			this.textBox2.TabIndex = 2;
+			this.textBox2.Text = "Alligator7";
+			// 
+			// textBox1
+			// 
+			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.textBox1.Location = new System.Drawing.Point(135, 34);
+			this.textBox1.Name = "textBox1";
+			this.textBox1.Size = new System.Drawing.Size(260, 22);
+			this.textBox1.TabIndex = 2;
+			this.textBox1.Text = "John Doe";
 			// 
 			// linkLabel1
 			// 
@@ -111,6 +180,7 @@
 			this.button2.TabIndex = 8;
 			this.button2.Text = "&Cancel";
 			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// button1
 			// 
@@ -133,17 +203,17 @@
 			this.panel1.Size = new System.Drawing.Size(436, 102);
 			this.panel1.TabIndex = 10;
 			// 
-			// panel2
+			// panel4
 			// 
-			this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+			this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-			this.panel2.Controls.Add(this.label4);
-			this.panel2.Controls.Add(this.label3);
-			this.panel2.Location = new System.Drawing.Point(107, 9);
-			this.panel2.Name = "panel2";
-			this.panel2.Size = new System.Drawing.Size(288, 84);
-			this.panel2.TabIndex = 11;
+			this.panel4.Controls.Add(this.pictureBox1);
+			this.panel4.Controls.Add(this.panel2);
+			this.panel4.Location = new System.Drawing.Point(12, 3);
+			this.panel4.Name = "panel4";
+			this.panel4.Size = new System.Drawing.Size(412, 99);
+			this.panel4.TabIndex = 12;
 			// 
 			// pictureBox1
 			// 
@@ -157,15 +227,17 @@
 			this.pictureBox1.TabIndex = 0;
 			this.pictureBox1.TabStop = false;
 			// 
-			// label3
+			// panel2
 			// 
-			this.label3.AutoSize = true;
-			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label3.Location = new System.Drawing.Point(21, 16);
-			this.label3.Name = "label3";
-			this.label3.Size = new System.Drawing.Size(155, 25);
-			this.label3.TabIndex = 0;
-			this.label3.Text = "Safety warning";
+			this.panel2.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+			this.panel2.Controls.Add(this.label4);
+			this.panel2.Controls.Add(this.label3);
+			this.panel2.Location = new System.Drawing.Point(107, 9);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(288, 84);
+			this.panel2.TabIndex = 11;
 			// 
 			// label4
 			// 
@@ -176,90 +248,33 @@
 			this.label4.TabIndex = 0;
 			this.label4.Text = "Re-enter your credentials to continue.";
 			// 
-			// textBox1
+			// label3
 			// 
-			this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox1.Location = new System.Drawing.Point(135, 34);
-			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(260, 22);
-			this.textBox1.TabIndex = 2;
-			this.textBox1.Text = "John Doe";
+			this.label3.AutoSize = true;
+			this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.label3.Location = new System.Drawing.Point(21, 16);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(155, 25);
+			this.label3.TabIndex = 0;
+			this.label3.Text = "Safety warning";
 			// 
-			// panel3
+			// picSlice
 			// 
-			this.panel3.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(240)))), ((int)(((byte)(240)))));
-			this.panel3.Controls.Add(this.linkLabel2);
-			this.panel3.Controls.Add(this.pictureBox2);
-			this.panel3.Controls.Add(this.label6);
-			this.panel3.Location = new System.Drawing.Point(20, 135);
-			this.panel3.Name = "panel3";
-			this.panel3.Size = new System.Drawing.Size(375, 56);
-			this.panel3.TabIndex = 11;
-			// 
-			// label6
-			// 
-			this.label6.AutoSize = true;
-			this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-			this.label6.Location = new System.Drawing.Point(64, 10);
-			this.label6.Name = "label6";
-			this.label6.Size = new System.Drawing.Size(212, 17);
-			this.label6.TabIndex = 0;
-			this.label6.Text = "Changes cannot be undone.";
-			// 
-			// textBox2
-			// 
-			this.textBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.textBox2.Location = new System.Drawing.Point(135, 64);
-			this.textBox2.Name = "textBox2";
-			this.textBox2.PasswordChar = '*';
-			this.textBox2.Size = new System.Drawing.Size(260, 22);
-			this.textBox2.TabIndex = 2;
-			this.textBox2.Text = "Alligator7";
-			// 
-			// pictureBox2
-			// 
-			this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
-			this.pictureBox2.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("pictureBox2.BackgroundImage")));
-			this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-			this.pictureBox2.Location = new System.Drawing.Point(11, 7);
-			this.pictureBox2.Name = "pictureBox2";
-			this.pictureBox2.Size = new System.Drawing.Size(45, 44);
-			this.pictureBox2.TabIndex = 12;
-			this.pictureBox2.TabStop = false;
-			// 
-			// linkLabel2
-			// 
-			this.linkLabel2.AutoSize = true;
-			this.linkLabel2.Location = new System.Drawing.Point(64, 30);
-			this.linkLabel2.Name = "linkLabel2";
-			this.linkLabel2.Size = new System.Drawing.Size(44, 17);
-			this.linkLabel2.TabIndex = 12;
-			this.linkLabel2.TabStop = true;
-			this.linkLabel2.Text = "Why?";
-			// 
-			// panel4
-			// 
-			this.panel4.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
-			this.panel4.Controls.Add(this.pictureBox1);
-			this.panel4.Controls.Add(this.panel2);
-			this.panel4.Location = new System.Drawing.Point(12, 3);
-			this.panel4.Name = "panel4";
-			this.panel4.Size = new System.Drawing.Size(412, 99);
-			this.panel4.TabIndex = 12;
+			this.picSlice.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("picSlice.BackgroundImage")));
+			this.picSlice.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
+			this.picSlice.Location = new System.Drawing.Point(12, 322);
+			this.picSlice.Name = "picSlice";
+			this.picSlice.Size = new System.Drawing.Size(36, 31);
+			this.picSlice.TabIndex = 11;
+			this.picSlice.TabStop = false;
+			this.picSlice.Click += new System.EventHandler(this.picSlice_Click);
 			// 
 			// TestDialog
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(436, 365);
+			this.Controls.Add(this.picSlice);
 			this.Controls.Add(this.panel1);
 			this.Controls.Add(this.groupBox1);
 			this.Controls.Add(this.button2);
@@ -269,14 +284,15 @@
 			this.Text = "Confirmation required";
 			this.groupBox1.ResumeLayout(false);
 			this.groupBox1.PerformLayout();
-			this.panel1.ResumeLayout(false);
-			this.panel2.ResumeLayout(false);
-			this.panel2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
 			this.panel3.ResumeLayout(false);
 			this.panel3.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
+			this.panel1.ResumeLayout(false);
 			this.panel4.ResumeLayout(false);
+			((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+			this.panel2.ResumeLayout(false);
+			this.panel2.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.picSlice)).EndInit();
 			this.ResumeLayout(false);
 
 		}
@@ -301,5 +317,6 @@
 		private System.Windows.Forms.PictureBox pictureBox2;
 		private System.Windows.Forms.LinkLabel linkLabel2;
 		private System.Windows.Forms.Panel panel4;
+		private System.Windows.Forms.PictureBox picSlice;
 	}
 }

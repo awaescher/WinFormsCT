@@ -49,6 +49,12 @@
   <ItemGroup>
     <Compile Include="DotNetControlsSliceSelector.cs" />
     <Compile Include="ISliceSelector.cs" />
+    <Compile Include="LayerVisualizer.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="LayerVisualizer.Designer.cs">
+      <DependentUpon>LayerVisualizer.cs</DependentUpon>
+    </Compile>
     <Compile Include="SlicesVisualizerForm.cs" />
     <Compile Include="Model\CapturingContext.cs" />
     <Compile Include="Model\Slice.cs" />

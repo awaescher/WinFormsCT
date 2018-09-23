@@ -1,8 +1,8 @@
 # WinFormsCT
 
-### A new way to analyse the anatomy of a WinForms form.
+### A new way to analyse the anatomy of a WinForms UI.
 
-#### WinFormsCT is able to scan any form (`System.Windows.Forms.Form`) by traversing through all child controls recursively.
+#### WinFormsCT will scan any form (`System.Windows.Forms.Form`) and all of its child controls recursively to generate a sliced-based height map.
 * Out of a form like this ...
 
 ![img](_img/Dialog.png)

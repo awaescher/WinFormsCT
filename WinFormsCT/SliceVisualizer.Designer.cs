@@ -1,6 +1,6 @@
 ﻿namespace WinFormsCT
 {
-	partial class LayerVisualizer
+	partial class SliceVisualizer
 	{
 		/// <summary> 
 		/// Required designer variable.
@@ -93,7 +93,7 @@
 			this.buttonReset.UseVisualStyleBackColor = true;
 			this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
 			// 
-			// LayerVisualizer
+			// SliceVisualizer
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -103,7 +103,7 @@
 			this.Controls.Add(this.checkAutoDepth);
 			this.Controls.Add(this.trackDepth);
 			this.Controls.Add(this.trackZoom);
-			this.Name = "LayerVisualizer";
+			this.Name = "SliceVisualizer";
 			this.Size = new System.Drawing.Size(1779, 604);
 			((System.ComponentModel.ISupportInitialize)(this.trackZoom)).EndInit();
 			((System.ComponentModel.ISupportInitialize)(this.trackDepth)).EndInit();

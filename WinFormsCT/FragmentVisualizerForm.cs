@@ -26,7 +26,7 @@ namespace WinFormsCT
 				pic.Image = fragment.Image;
 				pic.Size = fragment.Image.Size;
 				pic.Location = fragment.Location;
-				pic.Tag = fragment.Layer;
+				pic.Tag = fragment.Slice;
 
 				displayForm.Controls.Add(pic);
 				pic.Show();
@@ -34,8 +34,8 @@ namespace WinFormsCT
 			}
 
 			var track = new TrackBar();
-			track.Minimum = fragments.Min(s => s.Layer);
-			track.Maximum = fragments.Max(s => s.Layer);
+			track.Minimum = fragments.Min(s => s.Slice);
+			track.Maximum = fragments.Max(s => s.Slice);
 			track.Orientation = Orientation.Vertical;
 			track.Dock = DockStyle.Right;
 			track.Value = track.Maximum;
@@ -54,8 +54,8 @@ namespace WinFormsCT
 
 			foreach (Control control in track.Parent.Controls)
 			{
-				if (int.TryParse(control.Tag?.ToString() ?? "", out int layer))
-					control.Visible = layer <= track.Value;
+				if (int.TryParse(control.Tag?.ToString() ?? "", out int slice))
+					control.Visible = slice <= track.Value;
 			}
 		}
 	}

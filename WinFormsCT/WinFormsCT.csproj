@@ -49,19 +49,19 @@
   <ItemGroup>
     <Compile Include="DotNetControlsFragmentSelector.cs" />
     <Compile Include="IFragmentSelector.cs" />
-    <Compile Include="LayerVisualizer.cs">
+    <Compile Include="SliceVisualizer.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="LayerVisualizer.Designer.cs">
-      <DependentUpon>LayerVisualizer.cs</DependentUpon>
+    <Compile Include="SliceVisualizer.Designer.cs">
+      <DependentUpon>SliceVisualizer.cs</DependentUpon>
     </Compile>
     <Compile Include="FragmentVisualizerForm.cs" />
     <Compile Include="Model\CapturingContext.cs" />
     <Compile Include="Model\Fragment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tomograph.cs" />
-    <EmbeddedResource Include="LayerVisualizer.resx">
-      <DependentUpon>LayerVisualizer.cs</DependentUpon>
+    <EmbeddedResource Include="SliceVisualizer.resx">
+      <DependentUpon>SliceVisualizer.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

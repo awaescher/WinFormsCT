@@ -9,7 +9,7 @@ namespace WinFormsCT.Model
 
 		public Point Location { get; internal set; }
 
-		public int Layer { get; internal set; }
+		public int Slice { get; internal set; }
 
 		public long Stamp { get; internal set; }
 

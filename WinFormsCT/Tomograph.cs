@@ -29,33 +29,33 @@ namespace WinFormsCT
 			return fragments;
 		}
 
-		public List<Image> RenderLayers(IEnumerable<Fragment> fragments)
+		public List<Image> RenderSlices(IEnumerable<Fragment> fragments)
 		{
 			var formFragment = fragments.FirstOrDefault()?.Control as Form;
 			if (formFragment == null)
 				throw new ArgumentNullException("First fragment has to be a System.Windows.Form!");
 
-			var layers = new List<Image>();
-			var layerSize = formFragment.Size;
+			var slices = new List<Image>();
+			var sliceSize = formFragment.Size;
 
-			var fragmentsInLayer = fragments
-				.OrderBy(s => s.Layer)
-				.GroupBy(s => s.Layer);
+			var fragmentsInSlice = fragments
+				.OrderBy(s => s.Slice)
+				.GroupBy(s => s.Slice);
 
-			foreach (var fragmentInLayer in fragmentsInLayer)
+			foreach (var fragmentInSlice in fragmentsInSlice)
 			{
-				var bmp = new Bitmap(layerSize.Width, layerSize.Height);
+				var bmp = new Bitmap(sliceSize.Width, sliceSize.Height);
 				using (var gfx = Graphics.FromImage(bmp))
 				{
-					var orderedFragments = fragmentInLayer.OrderBy(s => s.Stamp);
+					var orderedFragments = fragmentInSlice.OrderBy(s => s.Stamp);
 					foreach (var fragment in orderedFragments)
 						gfx.DrawImage(fragment.Image, fragment.Location);
 				}
 
-				layers.Add(bmp);
+				slices.Add(bmp);
 			}
 
-			return layers;
+			return slices;
 
 		}
 
@@ -64,14 +64,14 @@ namespace WinFormsCT
 			var fragments = new List<Fragment>();
 			var context = new CapturingContext(form);
 
-			CaptureFragments(context, form, fragments, layer: 0);
+			CaptureFragments(context, form, fragments, slice: 0);
 
 			return fragments;
 		}
 
-		private void CaptureFragments(CapturingContext context, Control current, List<Fragment> fragments, int layer)
+		private void CaptureFragments(CapturingContext context, Control current, List<Fragment> fragments, int slice)
 		{
-			var fragment = CaptureFragment(context, current, layer);
+			var fragment = CaptureFragment(context, current, slice);
 
 			// fragment should not be shown (could be a hidden tabpage) -> skip it with all of its children
 			if (fragment == null)
@@ -80,10 +80,10 @@ namespace WinFormsCT
 			fragments.Add(fragment);
 
 			foreach (Control control in current.Controls)
-				CaptureFragments(context, control, fragments, layer + 1);
+				CaptureFragments(context, control, fragments, slice + 1);
 		}
 
-		private Fragment CaptureFragment(CapturingContext context, Control control, int layer)
+		private Fragment CaptureFragment(CapturingContext context, Control control, int slice)
 		{
 			if (!FragmentSelector.ShouldShowFragment(control))
 				return null;
@@ -95,7 +95,7 @@ namespace WinFormsCT
 				Control = control,
 				OriginallyVisible = control.Visible,
 				Location = location,
-				Layer = layer,
+				Slice = slice,
 				Stamp = DateTime.UtcNow.Ticks
 			};
 		}

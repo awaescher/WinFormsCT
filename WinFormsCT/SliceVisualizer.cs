@@ -10,9 +10,9 @@ using System.Drawing.Drawing2D;
 
 namespace WinFormsCT
 {
-	public partial class LayerVisualizer : UserControl
+	public partial class SliceVisualizer : UserControl
 	{
-		private List<Image> _layers;
+		private List<Image> _slices;
 		private Point _offset;
 		private int _zoom;
 		private bool _moving;
@@ -26,7 +26,7 @@ namespace WinFormsCT
 		private int _depth;
 		private bool _autoDepth;
 
-		public LayerVisualizer()
+		public SliceVisualizer()
 		{
 			InitializeComponent();
 
@@ -106,56 +106,56 @@ namespace WinFormsCT
 
 			base.OnPaint(e);
 
-			if (Layers?.Count < 1)
+			if (Slices?.Count < 1)
 				return;
 
 			var offsetAlpha = Math.Max(Math.Min((Math.Abs(Offset.X) + Math.Abs(Offset.Y)) / 25, 50), 0);
 			var zoomAlpha = Zoom == 0 ? 0 : Math.Min(Zoom / 10, 50);
 			var depthAlpha = Depth == 0 ? 0 : Math.Min(Depth / 10, 50);
-			var layerAlpha = new[] { offsetAlpha, zoomAlpha, depthAlpha }.Max();
+			var sliceAlpha = new[] { offsetAlpha, zoomAlpha, depthAlpha }.Max();
 
-			using (var layerBackBrush = new SolidBrush(Color.FromArgb(layerAlpha, Color.Black)))
-			using (var layerBorderPen = new Pen(Color.FromArgb(20, Color.Black)))
+			using (var sliceBackBrush = new SolidBrush(Color.FromArgb(sliceAlpha, Color.Black)))
+			using (var sliceBorderPen = new Pen(Color.FromArgb(20, Color.Black)))
 			{
-				var maxLayerSize = new Size(Layers.Max(l => l.Width), Layers.Max(l => l.Height));
-				var originLeft = (Width - maxLayerSize.Width) / 2;
-				var originTop = (Height - maxLayerSize.Height) / 2;
+				var maxSliceSize = new Size(Slices.Max(l => l.Width), Slices.Max(l => l.Height));
+				var originLeft = (Width - maxSliceSize.Width) / 2;
+				var originTop = (Height - maxSliceSize.Height) / 2;
 
-				for (int i = 0; i < Layers.Count; i++)
+				for (int i = 0; i < Slices.Count; i++)
 				{
+					var slice = Slices[i];
+
 					var offsetAffectFactor = 0.0d;
 
 					if (TwoWaySpring)
-						offsetAffectFactor = (((double)i - (double)(Layers.Count / 2)) / (double)Layers.Count * 2);
+						offsetAffectFactor = (((double)i - (double)(Slices.Count / 2)) / (double)Slices.Count * 2);
 					else
-						offsetAffectFactor = (double)i / (double)Layers.Count;
+						offsetAffectFactor = (double)i / (double)Slices.Count;
 
-					var zoomAffectFactor = (double)(i + 1 /* +1 makes the last layer move with the zoom as well */ ) / (double)Layers.Count;
+					var zoomAffectFactor = (double)(i + 1 /* +1 makes the last slice move with the zoom as well */ ) / (double)Slices.Count;
 					if (Zoom < 0)
 						zoomAffectFactor = Zoom;
 
-					var depthAffectFactor = ((double)Layers.Count - (double)(i + 1)) / (double)Layers.Count;
-
-					var layer = Layers[i];
+					var depthAffectFactor = ((double)Slices.Count - (double)(i + 1)) / (double)Slices.Count;
 
 					var left = originLeft + (int)(offsetAffectFactor * Offset.X);
 					var top = originTop + (int)(offsetAffectFactor * Offset.Y);
 
-					var rect = new Rectangle(left, top, layer.Width, layer.Height);
+					var rect = new Rectangle(left, top, slice.Width, slice.Height);
 
 					var infateBy = Zoom * zoomAffectFactor - Depth * depthAffectFactor;
-					var ratio = ((double)layer.Width / (double)layer.Height);
+					var ratio = ((double)slice.Width / (double)slice.Height);
 					rect.Inflate((int)(infateBy * ratio), (int)(infateBy));
 
 					if (rect.Height > Height || rect.Width > Width)
 						continue;
 
-					e.Graphics.FillRectangle(layerBackBrush, rect);
+					e.Graphics.FillRectangle(sliceBackBrush, rect);
 
-					e.Graphics.DrawImage(layer, rect);
+					e.Graphics.DrawImage(slice, rect);
 
-					if (layerAlpha > 0)
-						e.Graphics.DrawRectangle(layerBorderPen, rect);
+					if (sliceAlpha > 0)
+						e.Graphics.DrawRectangle(sliceBorderPen, rect);
 
 				}
 			}
@@ -166,12 +166,12 @@ namespace WinFormsCT
 			//base.OnPaintBackground(e);
 		}
 
-		public List<Image> Layers
+		public List<Image> Slices
 		{
-			get => _layers ?? new List<Image>();
+			get => _slices ?? new List<Image>();
 			set
 			{
-				_layers = value;
+				_slices = value;
 				Invalidate();
 			}
 		}

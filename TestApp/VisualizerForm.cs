@@ -16,9 +16,9 @@ namespace TestApp
 			InitializeComponent();
 		}
 
-		public void Show(List<Image> layers)
+		public void Show(List<Image> slices)
 		{
-			layerVisualizer.Layers = layers;
+			sliceVisualizer.Slices = slices;
 			Show();
 		}
 	}

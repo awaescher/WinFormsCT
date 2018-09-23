@@ -31,31 +31,31 @@ namespace TestApp
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisualizerForm));
-			this.layerVisualizer = new LayerVisualizer();
+			this.sliceVisualizer = new SliceVisualizer();
 			this.SuspendLayout();
 			// 
-			// layerVisualizer
+			// sliceVisualizer
 			// 
-			this.layerVisualizer.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
-			this.layerVisualizer.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
-			this.layerVisualizer.Dock = System.Windows.Forms.DockStyle.Fill;
-			this.layerVisualizer.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
-			this.layerVisualizer.Layers = ((System.Collections.Generic.List<System.Drawing.Image>)(resources.GetObject("layerVisualizer.Layers")));
-			this.layerVisualizer.Location = new System.Drawing.Point(0, 0);
-			this.layerVisualizer.Name = "layerVisualizer";
-			this.layerVisualizer.Offset = new System.Drawing.Point(0, 0);
-			this.layerVisualizer.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
-			this.layerVisualizer.Size = new System.Drawing.Size(1241, 657);
-			this.layerVisualizer.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
-			this.layerVisualizer.TabIndex = 0;
-			this.layerVisualizer.Zoom = 0;
+			this.sliceVisualizer.CompositingMode = System.Drawing.Drawing2D.CompositingMode.SourceOver;
+			this.sliceVisualizer.CompositingQuality = System.Drawing.Drawing2D.CompositingQuality.HighSpeed;
+			this.sliceVisualizer.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.sliceVisualizer.InterpolationMode = System.Drawing.Drawing2D.InterpolationMode.NearestNeighbor;
+			this.sliceVisualizer.Slices = ((System.Collections.Generic.List<System.Drawing.Image>)(resources.GetObject("sliceVisualizer.Slices")));
+			this.sliceVisualizer.Location = new System.Drawing.Point(0, 0);
+			this.sliceVisualizer.Name = "sliceVisualizer";
+			this.sliceVisualizer.Offset = new System.Drawing.Point(0, 0);
+			this.sliceVisualizer.PixelOffsetMode = System.Drawing.Drawing2D.PixelOffsetMode.Half;
+			this.sliceVisualizer.Size = new System.Drawing.Size(1241, 657);
+			this.sliceVisualizer.SmoothingMode = System.Drawing.Drawing2D.SmoothingMode.None;
+			this.sliceVisualizer.TabIndex = 0;
+			this.sliceVisualizer.Zoom = 0;
 			// 
 			// VisualizerForm
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(1241, 657);
-			this.Controls.Add(this.layerVisualizer);
+			this.Controls.Add(this.sliceVisualizer);
 			this.Name = "VisualizerForm";
 			this.Text = "VisualizerForm";
 			this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
@@ -65,6 +65,6 @@ namespace TestApp
 
 		#endregion
 
-		private LayerVisualizer layerVisualizer;
+		private SliceVisualizer sliceVisualizer;
 	}
 }

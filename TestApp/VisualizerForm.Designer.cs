@@ -1,4 +1,6 @@
-﻿namespace TestApp
+﻿using WinFormsCT;
+
+namespace TestApp
 {
 	partial class VisualizerForm
 	{
@@ -29,7 +31,7 @@
 		private void InitializeComponent()
 		{
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(VisualizerForm));
-			this.layerVisualizer = new TestApp.LayerVisualizer();
+			this.layerVisualizer = new LayerVisualizer();
 			this.SuspendLayout();
 			// 
 			// layerVisualizer

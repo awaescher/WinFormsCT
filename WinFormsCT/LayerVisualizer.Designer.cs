@@ -1,4 +1,4 @@
-﻿namespace TestApp
+﻿namespace WinFormsCT
 {
 	partial class LayerVisualizer
 	{

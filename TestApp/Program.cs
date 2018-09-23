@@ -13,6 +13,8 @@ namespace TestApp
 		[STAThread]
 		static void Main()
 		{
+			NSidekick.Attach();
+
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
 			Application.Run(new TestForm());

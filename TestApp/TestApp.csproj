@@ -44,6 +44,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="NSidekick.cs" />
     <Compile Include="TestDialog.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -83,6 +84,7 @@
     <EmbeddedResource Include="VisualizerForm.resx">
       <DependentUpon>VisualizerForm.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

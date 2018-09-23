@@ -8,7 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.Drawing.Drawing2D;
 
-namespace TestApp
+namespace WinFormsCT
 {
 	public partial class LayerVisualizer : UserControl
 	{
@@ -16,12 +16,13 @@ namespace TestApp
 		private Point _offset;
 		private int _zoom;
 		private bool _moving;
-		private Point _mouseStart;
+		private Point _lastCursorPosition;
 		private CompositingMode _compositingMode = CompositingMode.SourceOver;
 		private CompositingQuality _compositingQuality = CompositingQuality.HighSpeed;
 		private PixelOffsetMode _pixelOffsetMode = PixelOffsetMode.Half;
 		private SmoothingMode _smoothingMode = SmoothingMode.None;
 		private InterpolationMode _interpolationMode = InterpolationMode.NearestNeighbor;
+		private bool _twoWayString = true;
 
 		public LayerVisualizer()
 		{
@@ -55,7 +56,7 @@ namespace TestApp
 		protected override void OnMouseDown(MouseEventArgs e)
 		{
 			_moving = true;
-			_mouseStart = e.Location;
+			_lastCursorPosition = e.Location;
 
 			base.OnMouseDown(e);
 		}
@@ -66,17 +67,18 @@ namespace TestApp
 
 			if (_moving)
 			{
-				var deltaX = e.Location.X - _mouseStart.X;
-				var deltaY = e.Location.Y - _mouseStart.Y;
+				var deltaX = e.Location.X - _lastCursorPosition.X;
+				var deltaY = e.Location.Y - _lastCursorPosition.Y;
 
-				Offset = new Point(deltaX, deltaY);
+				_lastCursorPosition = e.Location;
+
+				Offset = new Point(Offset.X + deltaX, Offset.Y + deltaY);
 			}
 		}
 
 		protected override void OnMouseUp(MouseEventArgs e)
 		{
 			_moving = false;
-			_mouseStart = Point.Empty;
 
 			base.OnMouseUp(e);
 		}
@@ -109,7 +111,13 @@ namespace TestApp
 
 				for (int i = 0; i < Layers.Count; i++)
 				{
-					var offsetAffectFactor = (double)i / (double)Layers.Count;
+					var offsetAffectFactor = 0.0d;
+
+					if (TwoWaySpring)
+						offsetAffectFactor = (((double)i - (double)(Layers.Count / 2)) / (double)Layers.Count * 2);
+					else
+						offsetAffectFactor = (double)i / (double)Layers.Count;
+
 					var zoomAffectFactor = (double)(i + 1 /* +1 makes the last layer move with the zoom as well */ ) / (double)Layers.Count;
 
 					if (Zoom < 0)
@@ -219,6 +227,16 @@ namespace TestApp
 			set
 			{
 				_interpolationMode = value;
+				Invalidate();
+			}
+		}
+
+		public bool TwoWaySpring
+		{
+			get => _twoWayString;
+			set
+			{
+				_twoWayString = value;
 				Invalidate();
 			}
 		}

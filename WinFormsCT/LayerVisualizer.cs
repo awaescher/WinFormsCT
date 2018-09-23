@@ -23,6 +23,8 @@ namespace WinFormsCT
 		private SmoothingMode _smoothingMode = SmoothingMode.None;
 		private InterpolationMode _interpolationMode = InterpolationMode.NearestNeighbor;
 		private bool _twoWayString = true;
+		private int _depth;
+		private bool _autoDepth;
 
 		public LayerVisualizer()
 		{
@@ -36,21 +38,30 @@ namespace WinFormsCT
 		{
 			base.OnLoad(e);
 
-			var track = new TrackBar();
-			track.Minimum = 0;
-			track.Maximum = 3000;
-			track.Value = 0;
-			track.Dock = DockStyle.Top;
-			track.Orientation = Orientation.Horizontal;
-			track.ValueChanged += Track_ValueChanged;
+			trackZoom.Minimum = 0;
+			trackZoom.Maximum = 3000;
+			trackZoom.Value = Zoom;
 
-			Controls.Add(track);
-			track.Show();
+			trackDepth.Minimum = 0;
+			trackDepth.Maximum = 3000;
+			trackDepth.Value = Depth;
+
+			checkAutoDepth.Checked = AutoDepth;
 		}
 
-		private void Track_ValueChanged(object sender, EventArgs e)
+		private void trackZoom_ValueChanged(object sender, EventArgs e)
 		{
-			Zoom = (sender as TrackBar).Value;
+			Zoom = trackZoom.Value;
+		}
+
+		private void trackDepth_ValueChanged(object sender, EventArgs e)
+		{
+			Depth = trackDepth.Value;
+		}
+
+		private void checkAutoDepth_CheckedChanged(object sender, EventArgs e)
+		{
+			AutoDepth = checkAutoDepth.Checked;
 		}
 
 		protected override void OnMouseDown(MouseEventArgs e)
@@ -100,7 +111,8 @@ namespace WinFormsCT
 
 			var offsetAlpha = Math.Max(Math.Min((Math.Abs(Offset.X) + Math.Abs(Offset.Y)) / 25, 50), 0);
 			var zoomAlpha = Zoom == 0 ? 0 : Math.Min(Zoom / 10, 50);
-			var layerAlpha = Math.Max(offsetAlpha, zoomAlpha);
+			var depthAlpha = Depth == 0 ? 0 : Math.Min(Depth / 10, 50);
+			var layerAlpha = new[] { offsetAlpha, zoomAlpha, depthAlpha }.Max();
 
 			using (var layerBackBrush = new SolidBrush(Color.FromArgb(layerAlpha, Color.Black)))
 			using (var layerBorderPen = new Pen(Color.FromArgb(20, Color.Black)))
@@ -119,9 +131,10 @@ namespace WinFormsCT
 						offsetAffectFactor = (double)i / (double)Layers.Count;
 
 					var zoomAffectFactor = (double)(i + 1 /* +1 makes the last layer move with the zoom as well */ ) / (double)Layers.Count;
-
 					if (Zoom < 0)
 						zoomAffectFactor = Zoom;
+
+					var depthAffectFactor = ((double)Layers.Count - (double)(i + 1)) / (double)Layers.Count;
 
 					var layer = Layers[i];
 
@@ -130,7 +143,9 @@ namespace WinFormsCT
 
 					var rect = new Rectangle(left, top, layer.Width, layer.Height);
 
-					rect.Inflate((int)(Zoom * zoomAffectFactor), (int)(Zoom * zoomAffectFactor));
+					var infateBy = Zoom * zoomAffectFactor - Depth * depthAffectFactor;
+					var ratio = ((double)layer.Width / (double)layer.Height);
+					rect.Inflate((int)(infateBy * ratio), (int)(infateBy));
 
 					if (rect.Height > Height || rect.Width > Width)
 						continue;
@@ -139,7 +154,7 @@ namespace WinFormsCT
 
 					e.Graphics.DrawImage(layer, rect);
 
-					if (!Offset.IsEmpty || Zoom != 0)
+					if (layerAlpha > 0)
 						e.Graphics.DrawRectangle(layerBorderPen, rect);
 
 				}
@@ -177,6 +192,22 @@ namespace WinFormsCT
 			set
 			{
 				_zoom = value;
+				Invalidate();
+			}
+		}
+
+		public int Depth
+		{
+			get
+			{
+				if (AutoDepth)
+					return (int)(Math.Sqrt((Math.Pow(Offset.X, 2) + Math.Pow(Offset.Y, 2))) / 3);
+
+				return _depth;
+			}
+			set
+			{
+				_depth = value;
 				Invalidate();
 			}
 		}
@@ -239,6 +270,29 @@ namespace WinFormsCT
 				_twoWayString = value;
 				Invalidate();
 			}
+		}
+
+		public bool AutoDepth
+		{
+			get => _autoDepth;
+			set
+			{
+				_autoDepth = value;
+				Invalidate();
+			}
+		}
+
+		private void buttonReset_Click(object sender, EventArgs e)
+		{
+			Reset();
+		}
+
+		private void Reset()
+		{
+			AutoDepth = false;
+			Depth = 0;
+			Zoom = 0;
+			Offset = Point.Empty;
 		}
 	}
 }

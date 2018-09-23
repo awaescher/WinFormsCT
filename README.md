@@ -1,6 +1,6 @@
 # WinFormsCT
 
-### A new way to analyse the anatomy of any form.
+### A new way to analyse the anatomy of a WinForms form.
 
 #### WinFormsCT is able to scan any form (`System.Windows.Forms.Form`) by traversing through all child controls recursively.
 * Out of a form like this ...

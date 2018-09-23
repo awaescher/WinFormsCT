@@ -47,17 +47,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DotNetControlsSliceSelector.cs" />
-    <Compile Include="ISliceSelector.cs" />
+    <Compile Include="DotNetControlsFragmentSelector.cs" />
+    <Compile Include="IFragmentSelector.cs" />
     <Compile Include="LayerVisualizer.cs">
       <SubType>UserControl</SubType>
     </Compile>
     <Compile Include="LayerVisualizer.Designer.cs">
       <DependentUpon>LayerVisualizer.cs</DependentUpon>
     </Compile>
-    <Compile Include="SlicesVisualizerForm.cs" />
+    <Compile Include="FragmentVisualizerForm.cs" />
     <Compile Include="Model\CapturingContext.cs" />
-    <Compile Include="Model\Slice.cs" />
+    <Compile Include="Model\Fragment.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tomograph.cs" />
     <EmbeddedResource Include="LayerVisualizer.resx">

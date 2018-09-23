@@ -2,9 +2,9 @@
 
 namespace WinFormsCT
 {
-	public class DotNetControlsSliceSelector : ISliceSelector
+	public class DotNetControlsFragmentSelector : IFragmentSelector
 	{
-		public virtual bool ShouldShowSlice(Control control)
+		public virtual bool ShouldShowFragment(Control control)
 		{
 			if (control is TabPage p)
 			{

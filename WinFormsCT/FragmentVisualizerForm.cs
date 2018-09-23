@@ -7,26 +7,26 @@ using WinFormsCT.Model;
 
 namespace WinFormsCT
 {
-	public class SlicesVisualizerForm
+	public class FragmentVisualizerForm
 	{
-		public void Show(IEnumerable<Slice> slices)
+		public void Show(IEnumerable<Fragment> fragments)
 		{
-			var slicedForm = slices.FirstOrDefault()?.Control as Form;
-			if (slicedForm == null)
-				throw new ArgumentNullException("First slice has to be a System.Windows.Form!");
+			var formFragment = fragments.FirstOrDefault()?.Control as Form;
+			if (formFragment == null)
+				throw new ArgumentNullException("First fragment has to be a System.Windows.Form!");
 
 			var displayForm = new Form() { BackColor = Color.FromArgb(30, 30, 30) };
-			displayForm.Size = new Size(slicedForm.Width + 150, slicedForm.Height + 80);
+			displayForm.Size = new Size(formFragment.Width + 150, formFragment.Height + 80);
 			displayForm.SuspendLayout();
 
-			foreach (var slice in slices)
+			foreach (var fragment in fragments)
 			{
 				var pic = new PictureBox();
 
-				pic.Image = slice.Image;
-				pic.Size = slice.Image.Size;
-				pic.Location = slice.Location;
-				pic.Tag = slice.Layer;
+				pic.Image = fragment.Image;
+				pic.Size = fragment.Image.Size;
+				pic.Location = fragment.Location;
+				pic.Tag = fragment.Layer;
 
 				displayForm.Controls.Add(pic);
 				pic.Show();
@@ -34,8 +34,8 @@ namespace WinFormsCT
 			}
 
 			var track = new TrackBar();
-			track.Minimum = slices.Min(s => s.Layer);
-			track.Maximum = slices.Max(s => s.Layer);
+			track.Minimum = fragments.Min(s => s.Layer);
+			track.Maximum = fragments.Max(s => s.Layer);
 			track.Orientation = Orientation.Vertical;
 			track.Dock = DockStyle.Right;
 			track.Value = track.Maximum;

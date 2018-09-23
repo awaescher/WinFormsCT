@@ -11,45 +11,45 @@ namespace WinFormsCT
 	public class Tomograph
 	{
 		public Tomograph()
-			: this(new DotNetControlsSliceSelector())
+			: this(new DotNetControlsFragmentSelector())
 		{
 		}
 
-		public Tomograph(ISliceSelector sliceSelector)
+		public Tomograph(IFragmentSelector fragmentSelector)
 		{
-			SliceSelector = sliceSelector ?? throw new ArgumentNullException(nameof(sliceSelector));
+			FragmentSelector = fragmentSelector ?? throw new ArgumentNullException(nameof(fragmentSelector));
 		}
 
-		public List<Slice> Scan(Form target)
+		public List<Fragment> Scan(Form target)
 		{
-			var slices = CaptureSlices(target);
+			var fragments = CaptureFragments(target);
 
-			Develop(slices);
+			Develop(fragments);
 
-			return slices;
+			return fragments;
 		}
 
-		public List<Image> RenderLayers(IEnumerable<Slice> slices)
+		public List<Image> RenderLayers(IEnumerable<Fragment> fragments)
 		{
-			var slicedForm = slices.FirstOrDefault()?.Control as Form;
-			if (slicedForm == null)
-				throw new ArgumentNullException("First slice has to be a System.Windows.Form!");
+			var formFragment = fragments.FirstOrDefault()?.Control as Form;
+			if (formFragment == null)
+				throw new ArgumentNullException("First fragment has to be a System.Windows.Form!");
 
 			var layers = new List<Image>();
-			var layerSize = slicedForm.Size;
+			var layerSize = formFragment.Size;
 
-			var slicesInLayers = slices
+			var fragmentsInLayer = fragments
 				.OrderBy(s => s.Layer)
 				.GroupBy(s => s.Layer);
 
-			foreach (var slicesInLayer in slicesInLayers)
+			foreach (var fragmentInLayer in fragmentsInLayer)
 			{
 				var bmp = new Bitmap(layerSize.Width, layerSize.Height);
 				using (var gfx = Graphics.FromImage(bmp))
 				{
-					var orderedSlices = slicesInLayer.OrderBy(s => s.Stamp);
-					foreach (var slice in orderedSlices)
-						gfx.DrawImage(slice.Image, slice.Location);
+					var orderedFragments = fragmentInLayer.OrderBy(s => s.Stamp);
+					foreach (var fragment in orderedFragments)
+						gfx.DrawImage(fragment.Image, fragment.Location);
 				}
 
 				layers.Add(bmp);
@@ -59,38 +59,38 @@ namespace WinFormsCT
 
 		}
 
-		private List<Slice> CaptureSlices(Form form)
+		private List<Fragment> CaptureFragments(Form form)
 		{
-			var slices = new List<Slice>();
+			var fragments = new List<Fragment>();
 			var context = new CapturingContext(form);
 
-			CaptureSlices(context, form, slices, layer: 0);
+			CaptureFragments(context, form, fragments, layer: 0);
 
-			return slices;
+			return fragments;
 		}
 
-		private void CaptureSlices(CapturingContext context, Control current, List<Slice> slices, int layer)
+		private void CaptureFragments(CapturingContext context, Control current, List<Fragment> fragments, int layer)
 		{
-			var slice = CaptureSlice(context, current, layer);
+			var fragment = CaptureFragment(context, current, layer);
 
-			// slice should not be shown (could be a hidden tabpage) -> skip it with all of its children
-			if (slice == null)
+			// fragment should not be shown (could be a hidden tabpage) -> skip it with all of its children
+			if (fragment == null)
 				return;
 
-			slices.Add(slice);
+			fragments.Add(fragment);
 
 			foreach (Control control in current.Controls)
-				CaptureSlices(context, control, slices, layer + 1);
+				CaptureFragments(context, control, fragments, layer + 1);
 		}
 
-		private Slice CaptureSlice(CapturingContext context, Control control, int layer)
+		private Fragment CaptureFragment(CapturingContext context, Control control, int layer)
 		{
-			if (!SliceSelector.ShouldShowSlice(control))
+			if (!FragmentSelector.ShouldShowFragment(control))
 				return null;
 
 			var location = control is Form ? Point.Empty : GetRelativeLocation(context, control);
 
-			return new Slice()
+			return new Fragment()
 			{
 				Control = control,
 				OriginallyVisible = control.Visible,
@@ -100,9 +100,9 @@ namespace WinFormsCT
 			};
 		}
 
-		private void Develop(List<Slice> slices) => slices.ForEach(Develop);
+		private void Develop(List<Fragment> fragments) => fragments.ForEach(Develop);
 
-		private void Develop(Slice slice)
+		private void Develop(Fragment fragment)
 		{
 			var invisibleControlColor = Color.FromArgb(125, Color.Red);
 
@@ -111,16 +111,16 @@ namespace WinFormsCT
 			{
 				try
 				{
-					slice.Control.Visible = true;
+					fragment.Control.Visible = true;
 
-					foreach (Control child in slice.Control.Controls)
+					foreach (Control child in fragment.Control.Controls)
 						child.Visible = false;
 
-					var bmp = new Bitmap(slice.Control.Width, slice.Control.Height);
+					var bmp = new Bitmap(fragment.Control.Width, fragment.Control.Height);
 
-					slice.Control.DrawToBitmap(bmp, new Rectangle(Point.Empty, slice.Control.Size));
+					fragment.Control.DrawToBitmap(bmp, new Rectangle(Point.Empty, fragment.Control.Size));
 
-					if (!slice.OriginallyVisible)
+					if (!fragment.OriginallyVisible)
 					{
 						using (var gfx = Graphics.FromImage(bmp))
 						{
@@ -134,11 +134,11 @@ namespace WinFormsCT
 						}
 					}
 
-					slice.Image = bmp;
+					fragment.Image = bmp;
 				}
 				finally
 				{
-					slice.Control.Visible = slice.OriginallyVisible;
+					fragment.Control.Visible = fragment.OriginallyVisible;
 				}
 			}
 		}
@@ -156,6 +156,6 @@ namespace WinFormsCT
 			return result;
 		}
 
-		public ISliceSelector SliceSelector { get; }
+		public IFragmentSelector FragmentSelector { get; }
 	}
 }

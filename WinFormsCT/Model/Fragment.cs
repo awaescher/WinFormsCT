@@ -3,7 +3,7 @@ using System.Windows.Forms;
 
 namespace WinFormsCT.Model
 {
-	public class Slice
+	public class Fragment
 	{
 		public Control Control { get; internal set; }
 

@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/10/nuspec.xsd">
+    <metadata>
+        <id>WinFormsCT</id>
+        <authors>Andreas Wäscher</authors>
+        <owners>Andreas Wäscher</owners>
+        <projectUrl>https://github.com/awaescher/WinFormsCT</projectUrl>
+        <iconUrl>https://raw.githubusercontent.com/awaescher/WinFormsCT/master/_img/AppIcon.ico</iconUrl>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <developmentDependency>false</developmentDependency>
+<summary>
+A new way to analyse the anatomy of a WinForms UI.
+</summary>
+<description>
+WinFormsCT will scan any System.Windows.Forms.Form and all of its child controls recursively to generate a sliced-based height map.
+This package contains the tomographer as well as a UserControl to interactively browse your WinForms UI.
+</description>
+    <tags>WinFormsCT Windows Forms UI</tags>
+    </metadata>
+    <files>
+        <file src=".\WinFormsCT\bin\Release\WinFormsCT.dll" target="lib\net40" />
+    </files>
+</package>

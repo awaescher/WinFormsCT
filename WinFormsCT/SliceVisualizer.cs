@@ -22,7 +22,7 @@ namespace WinFormsCT
 		private PixelOffsetMode _pixelOffsetMode = PixelOffsetMode.Half;
 		private SmoothingMode _smoothingMode = SmoothingMode.None;
 		private InterpolationMode _interpolationMode = InterpolationMode.NearestNeighbor;
-		private bool _twoWayString = true;
+		private bool _twoWayString;
 		private int _depth;
 		private bool _autoDepth;
 
@@ -32,36 +32,25 @@ namespace WinFormsCT
 
 			SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
 			SetStyle(ControlStyles.ResizeRedraw, true);
+
+			_twoWayString = true;
+			_autoDepth = true;
 		}
 
-		protected override void OnLoad(EventArgs e)
+		protected override void OnKeyDown(KeyEventArgs e)
 		{
-			base.OnLoad(e);
+			base.OnKeyDown(e);
 
-			trackZoom.Minimum = 0;
-			trackZoom.Maximum = 3000;
-			trackZoom.Value = Zoom;
-
-			trackDepth.Minimum = 0;
-			trackDepth.Maximum = 3000;
-			trackDepth.Value = Depth;
-
-			checkAutoDepth.Checked = AutoDepth;
+			if (e.KeyCode == Keys.Escape)
+				Reset();
 		}
 
-		private void trackZoom_ValueChanged(object sender, EventArgs e)
+		protected override void OnMouseWheel(MouseEventArgs e)
 		{
-			Zoom = trackZoom.Value;
-		}
+			base.OnMouseWheel(e);
 
-		private void trackDepth_ValueChanged(object sender, EventArgs e)
-		{
-			Depth = trackDepth.Value;
-		}
-
-		private void checkAutoDepth_CheckedChanged(object sender, EventArgs e)
-		{
-			AutoDepth = checkAutoDepth.Checked;
+			var factor = (MaxZoom / 25) * (e.Delta < 0 ? -1 : 1);
+			Zoom += factor;
 		}
 
 		protected override void OnMouseDown(MouseEventArgs e)
@@ -96,6 +85,8 @@ namespace WinFormsCT
 
 		protected override void OnPaint(PaintEventArgs e)
 		{
+			const float EXTENUATED_MOVEMENT_FACTOR = 0.6f;
+
 			e.Graphics.Clear(BackColor);
 
 			e.Graphics.CompositingMode = _compositingMode;
@@ -130,20 +121,20 @@ namespace WinFormsCT
 					if (TwoWaySpring)
 						offsetAffectFactor = (((double)i - (double)(Slices.Count / 2)) / (double)Slices.Count * 2);
 					else
-						offsetAffectFactor = (double)i / (double)Slices.Count;
+						offsetAffectFactor = (double)i/ (double)Slices.Count;
 
 					var zoomAffectFactor = (double)(i + 1 /* +1 makes the last slice move with the zoom as well */ ) / (double)Slices.Count;
 					if (Zoom < 0)
 						zoomAffectFactor = Zoom;
 
-					var depthAffectFactor = ((double)Slices.Count - (double)(i + 1)) / (double)Slices.Count;
+					var depthAffectFactor = ((double)Slices.Count - (double)(i + 1)) * EXTENUATED_MOVEMENT_FACTOR / (double)Slices.Count;
 
 					var left = originLeft + (int)(offsetAffectFactor * Offset.X);
 					var top = originTop + (int)(offsetAffectFactor * Offset.Y);
 
 					var rect = new Rectangle(left, top, slice.Width, slice.Height);
 
-					var infateBy = Zoom * zoomAffectFactor - Depth * depthAffectFactor;
+					var infateBy = (Zoom * zoomAffectFactor) - (Depth * depthAffectFactor);
 					var ratio = ((double)slice.Width / (double)slice.Height);
 					rect.Inflate((int)(infateBy * ratio), (int)(infateBy));
 
@@ -164,6 +155,13 @@ namespace WinFormsCT
 		protected override void OnPaintBackground(PaintEventArgs e)
 		{
 			//base.OnPaintBackground(e);
+		}
+
+		private void Reset()
+		{
+			Depth = 0;
+			Zoom = 0;
+			Offset = Point.Empty;
 		}
 
 		public List<Image> Slices
@@ -191,7 +189,7 @@ namespace WinFormsCT
 			get => _zoom;
 			set
 			{
-				_zoom = value;
+				_zoom = Math.Max(0, Math.Min(MaxZoom, value));
 				Invalidate();
 			}
 		}
@@ -282,17 +280,8 @@ namespace WinFormsCT
 			}
 		}
 
-		private void buttonReset_Click(object sender, EventArgs e)
-		{
-			Reset();
-		}
+		public int MaxDepth { get; set; } = 1500;
 
-		private void Reset()
-		{
-			AutoDepth = false;
-			Depth = 0;
-			Zoom = 0;
-			Offset = Point.Empty;
-		}
+		public int MaxZoom { get; set; } = 2000;
 	}
 }

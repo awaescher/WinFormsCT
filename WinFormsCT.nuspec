@@ -14,6 +14,8 @@ A new way to analyse the anatomy of a WinForms UI.
 <description>
 WinFormsCT will scan any System.Windows.Forms.Form and all of its child controls recursively to generate a sliced-based height map.
 This package contains the tomographer as well as a UserControl to interactively browse your WinForms UI.
+
+The app icon was made by Freepik from www.flaticon.com and is licensed by Creative Commons BY 3.0. Thank you for your awesome work, mates!
 </description>
     <tags>WinFormsCT Windows Forms UI</tags>
     </metadata>
